@@ -28,8 +28,6 @@ public class Main {
         byte[] mac = new byte[6];
         int i = 0;
         String[] hex = address.split("[:-]");
-        logger.debug("Valeur des bytes : ");
-        Arrays.asList(hex).forEach(logger::debug);
         for(String currentHex : hex){
             mac[i]=Byte.parseByte(currentHex,16);
             i++;
