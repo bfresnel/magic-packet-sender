@@ -4,10 +4,10 @@ package fr.bfr.magicpacketsender;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MainTest {
+class MainTest {
 
     @Test
-    public void getByteDataTest() {
+    void getByteDataTest() {
         byte[] hex = new byte[6];
         hex[0] = Byte.parseByte("00", 16);
         hex[1] = Byte.parseByte("0D", 16);
@@ -27,7 +27,7 @@ public class MainTest {
     }
 
     //@Test
-    public void parseByte_GreaterThan90_Radix16() {
+    void parseByte_GreaterThan90_Radix16() {
         String hex12 = "00010010";
         String hex50 = "01010000";
         String hex95 = "10010000";
@@ -37,21 +37,21 @@ public class MainTest {
     }
 
     //@Test
-    public void getByteData_DoesNotThrowError() {
+    void getByteData_DoesNotThrowError() {
         String testedAddress = "AF-FE-61-08-22-4A";
         Assertions.assertDoesNotThrow(() ->
                 Main.getByteData(testedAddress));
     }
 
     //@Test
-    public void getByteData_DoesNotThrowError_GreaterThan90() {
+    void getByteData_DoesNotThrowError_GreaterThan90() {
         String testedAddress = "AF-FE-61-08-95-4A";
         Assertions.assertDoesNotThrow(() ->
                 Main.getByteData(testedAddress));
     }
 
     @Test
-    public void constructMagicPacketTest() {
+    void constructMagicPacketTest() {
         String testedAddress = "00-0D-61-08-22-4A";
 
         byte[] finalHex = new byte[102];

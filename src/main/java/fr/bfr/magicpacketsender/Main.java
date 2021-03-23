@@ -6,13 +6,12 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class Main {
 
-    public final static Logger logger = LoggerFactory.getLogger(Main.class);
+    public static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws UnknownHostException, SocketException {
         InetAddress address = InetAddress.getLocalHost();
@@ -27,11 +26,10 @@ public class Main {
         }
     }
 
-    public static String getLocalMacAddress(InetAddress inetAddress) throws SocketException, UnknownHostException {
+    public static String getLocalMacAddress(InetAddress inetAddress) throws SocketException {
         NetworkInterface net = NetworkInterface.getByInetAddress(inetAddress);
         byte[] mac = net.getHardwareAddress();
-        List macList = Arrays.asList(mac);
-        List<String> macByteList = new ArrayList();
+        List<String> macByteList = new ArrayList<>();
         for (int i = 0; i < mac.length; i++) {
             macByteList.add(String.format("%02X", mac[i]));
         }
