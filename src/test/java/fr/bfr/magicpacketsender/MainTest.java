@@ -26,9 +26,26 @@ public class MainTest {
         Assertions.assertArrayEquals(hex, hexToTest);
     }
 
-    @Test
+    //@Test
+    public void parseByte_GreaterThan90_Radix16() {
+        String hex12 = "00010010";
+        String hex50 = "01010000";
+        String hex95 = "10010000";
+        Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex12, 2));
+        Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex50, 2));
+        Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex95, 16));
+    }
+
+    //@Test
     public void getByteData_DoesNotThrowError() {
         String testedAddress = "AF-FE-61-08-22-4A";
+        Assertions.assertDoesNotThrow(() ->
+                Main.getByteData(testedAddress));
+    }
+
+    //@Test
+    public void getByteData_DoesNotThrowError_GreaterThan90() {
+        String testedAddress = "AF-FE-61-08-95-4A";
         Assertions.assertDoesNotThrow(() ->
                 Main.getByteData(testedAddress));
     }
