@@ -36,7 +36,7 @@ class MainTest {
         Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex95, 16));
     }
 
-    //@Test
+    @Test
     void getByteData_DoesNotThrowError() {
         String testedAddress = "AF-FE-61-08-22-4A";
         Assertions.assertDoesNotThrow(() ->

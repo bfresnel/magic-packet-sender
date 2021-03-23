@@ -33,7 +33,6 @@ public class Main {
         for (int i = 0; i < mac.length; i++) {
             macByteList.add(String.format("%02X", mac[i]));
         }
-        String.join("-", macByteList);
         return String.join("-", macByteList);
     }
 
