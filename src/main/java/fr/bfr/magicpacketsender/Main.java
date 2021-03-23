@@ -29,7 +29,7 @@ public class Main {
     public static String getLocalMacAddress(InetAddress inetAddress) throws SocketException {
         NetworkInterface net = NetworkInterface.getByInetAddress(inetAddress);
         byte[] mac = net.getHardwareAddress();
-        List<String> macByteList = new ArrayList<String>();
+        List<String> macByteList = new ArrayList<>();
         for (int i = 0; i < mac.length; i++) {
             macByteList.add(String.format("%02X", mac[i]));
         }
