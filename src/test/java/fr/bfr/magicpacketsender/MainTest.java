@@ -26,16 +26,6 @@ class MainTest {
         Assertions.assertArrayEquals(hex, hexToTest);
     }
 
-    //@Test
-    void parseByte_GreaterThan90_Radix16() {
-        String hex12 = "00010010";
-        String hex50 = "01010000";
-        String hex95 = "10010000";
-        Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex12, 2));
-        Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex50, 2));
-        Assertions.assertDoesNotThrow(() -> Byte.parseByte(hex95, 16));
-    }
-
     @Test
     void getByteData_DoesNotThrowError() {
         String testedAddress = "AF-FE-61-08-22-4A";
@@ -43,7 +33,7 @@ class MainTest {
                 Main.getByteData(testedAddress));
     }
 
-    //@Test
+    @Test
     void getByteData_DoesNotThrowError_GreaterThan90() {
         String testedAddress = "AF-FE-61-08-95-4A";
         Assertions.assertDoesNotThrow(() ->
@@ -52,7 +42,7 @@ class MainTest {
 
     @Test
     void whenMainUsed_ThrowsError() {
-        Assertions.assertThrows(NumberFormatException.class, () -> Main.main(new String[1]));
+        Assertions.assertThrows(NullPointerException.class, () -> Main.main(new String[1]));
     }
 
     @Test
@@ -74,9 +64,13 @@ class MainTest {
         finalHex[10] = Byte.parseByte("22", 16);
         finalHex[11] = Byte.parseByte("4A", 16);
 
-        byte[] dataToTest = Main.constructPacket("00-0D-61-08-22-4A");
+        byte[] dataToTest = Main.constructPacket(testedAddress);
 
         Assertions.assertEquals(finalHex[1], dataToTest[1]);
     }
 
+    @Test
+    void whenGetLocalMacAddress_addressIsNull_throwsNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class, () -> Main.getLocalMacAddress(null));
+    }
 }

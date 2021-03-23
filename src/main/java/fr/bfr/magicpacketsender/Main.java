@@ -22,18 +22,24 @@ public class Main {
             DatagramPacket packet = new DatagramPacket(packetData, 16);
             socket.send(packet);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
     public static String getLocalMacAddress(InetAddress inetAddress) throws SocketException {
-        NetworkInterface net = NetworkInterface.getByInetAddress(inetAddress);
-        byte[] mac = net.getHardwareAddress();
-        List<String> macByteList = new ArrayList<>();
-        for (int i = 0; i < mac.length; i++) {
-            macByteList.add(String.format("%02X", mac[i]));
+        String localMacAddress = "";
+        if (inetAddress != null) {
+            NetworkInterface net = NetworkInterface.getByInetAddress(inetAddress);
+            byte[] mac = net.getHardwareAddress();
+            List<String> macByteList = new ArrayList<>();
+            for (int i = 0; i < mac.length; i++) {
+                macByteList.add(String.format("%02X", mac[i]));
+            }
+            localMacAddress = String.join("-", macByteList);
+            return localMacAddress;
+        } else {
+            throw new NullPointerException("No InetAddress set");
         }
-        return String.join("-", macByteList);
     }
 
     /**

@@ -43,7 +43,7 @@ public class HexadecimalConverter {
                 returnedValue = (byte) 0xff;
                 break;
             default:
-                returnedValue = Byte.parseByte(value, 16);
+                returnedValue = (byte) Integer.parseInt(value, 16);
                 break;
 
         }
