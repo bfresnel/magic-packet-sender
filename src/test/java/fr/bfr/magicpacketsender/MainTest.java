@@ -51,6 +51,11 @@ class MainTest {
     }
 
     @Test
+    void whenMainUsed_ThrowsError() {
+        Assertions.assertThrows(NumberFormatException.class, () -> Main.main(new String[1]));
+    }
+
+    @Test
     void constructMagicPacketTest() {
         String testedAddress = "00-0D-61-08-22-4A";
 
