@@ -2,6 +2,10 @@ package fr.bfr.magicpacketsender;
 
 public class HexadecimalConverter {
 
+    private HexadecimalConverter() {
+        // Avoid instanciation of this class
+    }
+
     public static byte returnByteValue(String value) {
         byte returnedValue;
         switch (value) {
