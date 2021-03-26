@@ -1,14 +1,14 @@
 package fr.bfr.magicpacketsender;
 
-public class HexadecimalConverter {
+public class Converter {
 
-    private HexadecimalConverter() {
-        // Avoid instanciation of this class
+    private Converter() {
+        // Avoid instantiation of this class
     }
 
-    public static byte returnByteValue(String value) {
+    public static byte returnByteFromString(String hexadecimalValue) {
         byte returnedValue;
-        switch (value) {
+        switch (hexadecimalValue) {
             case "AF":
                 returnedValue = (byte) 0xaf;
                 break;
@@ -43,7 +43,7 @@ public class HexadecimalConverter {
                 returnedValue = (byte) 0xff;
                 break;
             default:
-                returnedValue = (byte) Integer.parseInt(value, 16);
+                returnedValue = (byte) Integer.parseInt(hexadecimalValue, 16);
                 break;
 
         }

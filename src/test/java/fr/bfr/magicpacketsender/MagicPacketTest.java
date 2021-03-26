@@ -4,7 +4,7 @@ package fr.bfr.magicpacketsender;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class MainTest {
+class MagicPacketTest {
 
     @Test
     void getByteDataTest() {
@@ -16,7 +16,7 @@ class MainTest {
         hex[4] = Byte.parseByte("22", 16);
         hex[5] = Byte.parseByte("4A", 16);
 
-        byte[] hexToTest = Main.getByteData("00-0D-61-08-22-4A");
+        byte[] hexToTest = MagicPacket.getByteData("00-0D-61-08-22-4A");
         Assertions.assertEquals(hex[0], hexToTest[0]);
         Assertions.assertEquals(hex[1], hexToTest[1]);
         Assertions.assertEquals(hex[2], hexToTest[2]);
@@ -30,19 +30,14 @@ class MainTest {
     void getByteData_DoesNotThrowError() {
         String testedAddress = "AF-FE-61-08-22-4A";
         Assertions.assertDoesNotThrow(() ->
-                Main.getByteData(testedAddress));
+                MagicPacket.getByteData(testedAddress));
     }
 
     @Test
     void getByteData_DoesNotThrowError_GreaterThan90() {
         String testedAddress = "AF-FE-61-08-95-4A";
         Assertions.assertDoesNotThrow(() ->
-                Main.getByteData(testedAddress));
-    }
-
-    //@Test
-    void whenMainUsed_ThrowsError() {
-        Assertions.assertThrows(NullPointerException.class, () -> Main.main(new String[1]));
+                MagicPacket.getByteData(testedAddress));
     }
 
     @Test
@@ -64,13 +59,13 @@ class MainTest {
         finalHex[10] = Byte.parseByte("22", 16);
         finalHex[11] = Byte.parseByte("4A", 16);
 
-        byte[] dataToTest = Main.constructPacket(testedAddress);
+        byte[] dataToTest = MagicPacket.constructPacket(testedAddress);
 
         Assertions.assertEquals(finalHex[1], dataToTest[1]);
     }
 
     @Test
     void whenGetLocalMacAddress_addressIsNull_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () -> Main.getLocalMacAddress(null));
+        Assertions.assertThrows(NullPointerException.class, () -> MagicPacket.getLocalMacAddress(null));
     }
 }

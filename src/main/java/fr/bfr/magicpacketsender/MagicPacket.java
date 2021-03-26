@@ -8,12 +8,11 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
 
+public class MagicPacket {
 
-public class Main {
+    public static final Logger logger = LoggerFactory.getLogger(MagicPacket.class);
 
-    public static final Logger logger = LoggerFactory.getLogger(Main.class);
-
-    public static void main(String[] args) throws UnknownHostException, SocketException {
+    public static void sendMagicPacket() throws UnknownHostException, SocketException {
         InetAddress address = InetAddress.getLocalHost();
         String addressAsString = getLocalMacAddress(address);
         logger.debug(addressAsString);
@@ -53,7 +52,7 @@ public class Main {
         int i = 0;
         String[] hex = address.split("[:-]");
         for (String currentHex : hex) {
-            mac[i] = HexadecimalConverter.returnByteValue(currentHex);
+            mac[i] = Converter.returnByteFromString(currentHex);
             i++;
         }
         return mac;
