@@ -7,6 +7,16 @@ import org.junit.jupiter.api.Test;
 class MagicPacketTest {
 
     @Test
+    void whenSendMagicPacketWithNoMacAddress_throwsIllegalArgumentException() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> MagicPacket.sendMagicPacket(""));
+    }
+
+    @Test
+    void whenSendMagicPacketWithSpecificMacAddress_sendMagicPacket() {
+        Assertions.assertDoesNotThrow(() -> MagicPacket.sendMagicPacket("AB-BC-CD-DE-AA-FF"));
+    }
+
+    @Test
     void getByteDataTest() {
         byte[] hex = new byte[6];
         hex[0] = Byte.parseByte("00", 16);
@@ -62,10 +72,5 @@ class MagicPacketTest {
         byte[] dataToTest = MagicPacket.constructPacket(testedAddress);
 
         Assertions.assertEquals(finalHex[1], dataToTest[1]);
-    }
-
-    @Test
-    void whenGetLocalMacAddress_addressIsNull_throwsNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () -> MagicPacket.getLocalMacAddress(null));
     }
 }

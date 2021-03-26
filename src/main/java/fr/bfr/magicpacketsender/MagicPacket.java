@@ -4,40 +4,28 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class MagicPacket {
 
     public static final Logger logger = LoggerFactory.getLogger(MagicPacket.class);
 
-    public static void sendMagicPacket() throws UnknownHostException, SocketException {
-        InetAddress address = InetAddress.getLocalHost();
-        String addressAsString = getLocalMacAddress(address);
-        logger.debug(addressAsString);
-        byte[] packetData = constructPacket(addressAsString);
-        try (DatagramSocket socket = new DatagramSocket(9, address)) {
-            DatagramPacket packet = new DatagramPacket(packetData, 16);
-            socket.send(packet);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        }
-    }
-
-    public static String getLocalMacAddress(InetAddress inetAddress) throws SocketException {
-        String localMacAddress = "";
-        if (inetAddress != null) {
-            NetworkInterface net = NetworkInterface.getByInetAddress(inetAddress);
-            byte[] mac = net.getHardwareAddress();
-            List<String> macByteList = new ArrayList<>();
-            for (int i = 0; i < mac.length; i++) {
-                macByteList.add(String.format("%02X", mac[i]));
+    public static void sendMagicPacket(String macAddress) throws IOException {
+        if (!macAddress.isEmpty()) {
+            byte[] packetData = constructPacket(macAddress);
+            try {
+                DatagramSocket socket = new DatagramSocket(9, InetAddress.getLocalHost());
+                DatagramPacket packet = new DatagramPacket(packetData, 0, 16, InetAddress.getLocalHost(), 9);
+                socket.send(packet);
+                logger.info("Magic packet sent !");
+            } catch (IOException e) {
+                logger.error(e.getMessage(), e);
+                throw new IOException(e);
             }
-            localMacAddress = String.join("-", macByteList);
-            return localMacAddress;
         } else {
-            throw new NullPointerException("No InetAddress set");
+            throw new IllegalArgumentException("The specified Mac address is empty !");
         }
     }
 
