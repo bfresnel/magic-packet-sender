@@ -2,6 +2,7 @@ package fr.bfr.magicpacketsender;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class MagicPacketTest {
@@ -12,11 +13,11 @@ class MagicPacketTest {
     }
 
     @Test
+    @Disabled("Disabled by default for Github")
     void whenSendMagicPacketWithSpecificMacAddress_sendMagicPacket() {
         Assertions.assertDoesNotThrow(() -> MagicPacket.sendMagicPacket("AB-BC-CD-DE-AA-FF"));
     }
 
-    @Test
     void getByteDataTest() {
         byte[] hex = new byte[6];
         hex[0] = Byte.parseByte("00", 16);

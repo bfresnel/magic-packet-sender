@@ -32,13 +32,13 @@ public class MagicPacket {
     /**
      * Return the byte value of an specified MAC address
      *
-     * @param address
+     * @param macAddress
      * @return byte values
      */
-    public static byte[] getByteData(String address) {
+    public static byte[] getByteData(String macAddress) {
         byte[] mac = new byte[6];
         int i = 0;
-        String[] hex = address.split("[:-]");
+        String[] hex = macAddress.split("[:-]");
         for (String currentHex : hex) {
             mac[i] = Converter.returnByteFromString(currentHex);
             i++;
