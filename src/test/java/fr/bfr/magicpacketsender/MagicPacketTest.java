@@ -16,6 +16,7 @@ class MagicPacketTest {
         Assertions.assertDoesNotThrow(() -> MagicPacket.sendMagicPacket("AB-BC-CD-DE-AA-FF"));
     }
 
+    @Test
     void getByteDataTest() {
         byte[] hex = new byte[6];
         hex[0] = Byte.parseByte("00", 16);
