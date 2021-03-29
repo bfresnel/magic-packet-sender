@@ -20,8 +20,7 @@ public class MagicPacket {
         if (!macAddress.isEmpty()) {
             byte[] packetData = constructPacket(macAddress);
             InetAddress destAddress = InetAddress.getByAddress(getByteData(macAddress));
-            try {
-                DatagramSocket socket = new DatagramSocket(9, InetAddress.getLocalHost());
+            try (DatagramSocket socket = new DatagramSocket(9, InetAddress.getLocalHost())) {
                 DatagramPacket packet = new DatagramPacket(packetData, 0, 16, destAddress, 9);
                 socket.send(packet);
                 logger.info("Magic packet sent !");
