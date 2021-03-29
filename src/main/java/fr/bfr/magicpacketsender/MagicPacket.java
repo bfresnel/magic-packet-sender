@@ -19,8 +19,10 @@ public class MagicPacket {
     public static void sendMagicPacket(String macAddress) throws IOException {
         if (!macAddress.isEmpty()) {
             byte[] packetData = constructPacket(macAddress);
-            try (DatagramSocket socket = new DatagramSocket(9, InetAddress.getLocalHost())) {
-                DatagramPacket packet = new DatagramPacket(packetData, 0, 16, InetAddress.getLocalHost(), 9);
+            InetAddress destAddress = InetAddress.getByAddress(getByteData(macAddress));
+            try {
+                DatagramSocket socket = new DatagramSocket(9, InetAddress.getLocalHost());
+                DatagramPacket packet = new DatagramPacket(packetData, 0, 16, destAddress, 9);
                 socket.send(packet);
                 logger.info("Magic packet sent !");
             } catch (IOException e) {
